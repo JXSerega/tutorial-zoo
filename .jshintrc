@@ -1,0 +1,14 @@
+{
+  "curly":true,
+  "devel":true,
+  "eqeqeq": true,
+  "immed": true,
+  "globals":{
+    "angular": true
+  },
+  "indent":2,
+  "quotmark": "single",
+  "trailing": true,
+  "undef":true,
+  "unused":true
+}

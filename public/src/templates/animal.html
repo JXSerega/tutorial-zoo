@@ -1,0 +1,75 @@
+<div class="page-header">
+    <h1>#{{ animal.id }}, {{ animal.type }}<small> {{ animal.count }} шт.</small></h1>
+</div>
+
+<button type="button" back="/" class="btn btn-primary" style="margin-bottom: 20px">
+    <i class="fa fa-arrow-left"></i> Назад
+</button>
+
+<div ng-init="tabs.active = 0" bs-active-pane="tabs.active" bs-tabs>
+    <div bs-pane data-title="Справочник пищи">
+        <div class="row">
+            <div class="col-sm-4">
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th style="width: 1px">#</th>
+                        <th style="width: 1px">Пища</th>
+                        <th>Кол-во</th>
+                        <th colspan="2">Цена</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="e in animalEats" class="am-fade-and-slide-left">
+                        <td ng-bind="e.id"></td>
+                        <td class="nowrap" ng-bind="eatsObject[ e.eat_id ].name"></td>
+                        <td class="nowrap">
+                            <div ng-if="eat.editing.id === e.id">
+                                <div class="inline-block-top">
+                                    <div class="input-group" style="width: 100px" ng-class="{'has-error': !eat.editing.eat_volume}">
+                                        <input type="number" required autofocus ng-focus="eat.editing.id === e.id" class="form-control input-sm" ng-model="eat.editing.eat_volume" placeholder="123.." on-esc="eat.cancel()" on-enter="eat.save($index)">
+                                        <div class="input-group-addon" ng-bind="eatsObject[ e.eat_id ].unit | units"></div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-sm" ng-click="eat.cancel()" bs-tooltip data-title="Отмена">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-success" ng-click="eat.save($index)" bs-tooltip data-title="Сохранить" ng-disabled="!eat.editing.eat_volume">
+                                    <i class="fa fa-check"></i>
+                                </button>
+                            </div>
+                            <div ng-if="eat.editing.id !== e.id" can-change ng-click="eat.edit($index)">
+                                <span ng-bind="e.eat_volume"></span>
+                                <b class="text-info" ng-bind="eatsObject[ e.eat_id ].unit | units"></b>
+                            </div>
+                        </td>
+                        <td ng-bind="eatsObject[ e.eat_id ].price"></td>
+                        <td>
+                            <div class="text-right">
+                                <button type="button" class="btn btn-danger btn-sm" ng-disabled="e.deleting" ng-click="removeEat($index, e.id)" bs-tooltip data-title="Удалить пищу у животного">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-if="!animalEats.length" class="am-fade-and-slide-left">
+                        <td colspan="5">
+                            <div class="text-center">Не задана еда</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <button type="button" class="btn btn-primary" data-template="/src/templates/modules/asides/animal-add-eat.html" bs-aside>
+                    <i class="fa fa-plus"></i> Добавить
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div bs-pane title="История пищи">
+
+        sadsaddsa
+    </div>
+</div>

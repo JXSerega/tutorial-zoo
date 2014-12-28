@@ -1,0 +1,37 @@
+<div class="aside" tabindex="-1" role="dialog">
+    <div class="aside-dialog">
+        <div class="aside-content" ng-init="eatAdd = {}">
+            <form novalidate name="eatAddForm">
+                <div class="aside-header">
+                    <button type="button" class="close" ng-click="$hide()">&times;</button>
+                    <h4 class="aside-title">Добавить пищу животному</h4>
+                </div>
+                <div class="aside-body">
+                        <div class="form-group" ng-class="{'has-error': eatAddForm.eat.$dirty && eatAddForm.eat.$invalid}">
+                            <label class="control-label" for="inputSelectEat">Наименование</label>
+                            <ui-select id="inputSelectEat" required name="eat" ng-model="eatAdd.eat">
+                                <ui-select-match placeholder="Выберите...">
+                                    <div ng-bind="$select.selected.name"></div>
+                                </ui-select-match>
+                                <ui-select-choices repeat="eat.id as eat in eats | filter : $select.search">
+                                    <div ng-bind-html="eat.name | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error has-feedback': eatAddForm.volume.$dirty && eatAddForm.volume.$invalid}">
+                            <label class="control-label" for="inputEatVolume">Количество</label>
+                            <input type="number" min="1" class="form-control" name="volume" ng-model="eatAdd.volume" id="inputEatVolume" required placeholder="123..">
+                            <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-if="eatAddForm.volume.$dirty && eatAddForm.volume.$invalid"></span>
+                            <span id="inputError2Status" class="sr-only" ng-if="eatAddForm.volume.$dirty && eatAddForm.volume.$invalid">(error)</span>
+                        </div>
+                </div>
+                <div class="aside-footer">
+                    <button type="button" class="btn btn-default" ng-click="$hide()">Отмена</button>
+                    <button class="btn btn-primary" ng-disabled="eatAddForm.$invalid" ng-click="eatAddSubmit(eatAdd); $hide()">
+                        <i class="fa fa-plus"></i> Добавить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

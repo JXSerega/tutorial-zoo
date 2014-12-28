@@ -1,0 +1,72 @@
+.transition(@time){
+  -webkit-transition: all @time ease-out;
+  -moz-transition: all @time ease-out;
+  -o-transition: all @time ease-out;
+  -ms-transition: all @time ease-out;
+  transition: all @time ease-out;
+}
+
+.opacity(@opacity) {
+  opacity: @opacity / 100;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=@{opacity})";
+  filter: ~"alpha(opacity=@{opacity})";
+}
+
+.inlineCol(@pos: top){
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  vertical-align: @pos;
+}
+
+.bgdImageLiner(@from, @to){
+  background-image: -webkit-linear-gradient(@from, @to);
+  background-image: -moz-linear-gradient(@from, @to);
+  background-image: -o-linear-gradient(@from, @to);
+  background-image: -ms-linear-gradient(@from, @to);
+  background-image: linear-gradient(@from, @to);
+}
+
+.bgdImageLiner(@posTop, @from, @to){
+  background-image: -webkit-linear-gradient(@posTop, @from, @to);
+  background-image: -moz-linear-gradient(@posTop, @from, @to);
+  background-image: -o-linear-gradient(@posTop, @from, @to);
+  background-image: -ms-linear-gradient(@posTop, @from, @to);
+  background-image: linear-gradient(@posTop, @from, @to);
+}
+
+.bgdImageLiner(@posTop, @posLeft, @from, @to){
+  background-image: -webkit-linear-gradient(@posTop, @posLeft, @from, @to);
+  background-image: -moz-linear-gradient(@posTop, @posLeft, @from, @to);
+  background-image: -o-linear-gradient(@posTop, @posLeft, @from, @to);
+  background-image: -ms-linear-gradient(@posTop, @posLeft, @from, @to);
+  background-image: linear-gradient(@posTop, @posLeft, @from, @to);
+}
+
+.bgdImageRadial(@position, @type, @from, @to){
+  background-image: -webkit-radial-gradient(@position, @type, @from, @to);
+  background-image: -moz-radial-gradient(@position, @type, @from, @to);
+  background-image: -o-radial-gradient(@position, @type, @from, @to);
+  background-image: -ms-radial-gradient(@position, @type, @from, @to);
+  background-image: radial-gradient(@position, @type, @from, @to);
+}
+
+.bgdSize(@param){
+  -webkit-background-size: @param;
+  -moz-background-size: @param;
+  background-size: @param;
+}
+
+.userSelect(@param){
+  -webkit-user-select: @param;
+  -moz-user-select: @param;
+  -ms-user-select: @param;
+  user-select: @param;
+}
+
+.resize(@param){
+  -webkit-resize: @param;
+  -moz-resize: @param;
+  resize: @param;
+}
