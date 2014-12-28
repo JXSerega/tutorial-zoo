@@ -28,13 +28,14 @@ module.exports = function(grunt) {
         },
         concat: {
             options: {
-                separator: '\n\n;'
+                separator: '\n\n'
             },
             dist: {
                 src: ['src/scripts/**/*.js'],
                 dest: 'build/app.js'
             }
         },
+
         watch: {
             files: [
                 'src/scripts/**/*.js',
@@ -50,6 +51,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Default task(s).
     grunt.registerTask('default', ['jshint', 'concat', 'less']);

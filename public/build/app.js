@@ -57,7 +57,7 @@ angular
         }
     ]);
 
-;angular
+angular
     .module('ZooApp')
     .controller('AnimalCtrl', [
         '$scope', '$routeParams', '$filter', 'Animals', 'AnimalsEats', 'Eats', 'ConfirmService',
@@ -133,7 +133,7 @@ angular
         }
     ]);
 
-;angular
+angular
     .module('ZooApp')
     .controller('OverviewCtrl', [
         '$scope', 'Animals', 'Eats',
@@ -143,13 +143,45 @@ angular
         }
     ]);
 
-;angular
+angular
+    .module('ZooApp')
+    .directive('back', ['$window', '$location', function($window, $location){
+        return {
+            restrict: 'A',
+            scope: {
+                url: '@back'
+            },
+            link: function(scope, element) {
+                element.bind('click', function(){
+                    if (!$window.history.length && scope.url) {
+                        $location.url(scope.url);
+                    } else {
+                        $window.history.back();
+                    }
+
+                    scope.$apply();
+                });
+            }
+        };
+    }]);
+
+angular
+    .module('ZooApp')
+    .directive('canChange', [function(){
+        return {
+            restrict: 'A',
+            transclude: true,
+            templateUrl: '/src/templates/modules/directives/can-change.html'
+        };
+    }]);
+
+angular
     .module('ZooApp')
     .directive('go', ['$location', function($location){
         return {
             strict: 'A',
             scope: {
-                link: '=go'
+                url: '=go'
             },
             link: function(scope, element){
                 element.css({
@@ -157,30 +189,15 @@ angular
                 });
 
                 element.on('click', function(){
-                    $location.url(scope.link);
+                    $location.url(scope.url);
                     scope.$apply();
                 });
             }
         };
-    }])
-    .directive('back', ['$window', '$location', function($window, $location){
-        return {
-            restrict: 'A',
-            scope: {
-                link: '@back'
-            },
-            link: function(scope, element) {
-                element.bind('click', function(){
-                    if (!$window.history.length && scope.link) {
-                        $location.url(scope.link);
-                    } else {
-                        $window.history.back();
-                        scope.$apply();
-                    }
-                });
-            }
-        };
-    }])
+    }]);
+
+angular
+    .module('ZooApp')
     .directive('onEnter', function () {
         return function (scope, element, attr) {
             element.bind('keydown keypress', function (event) {
@@ -193,29 +210,25 @@ angular
                 }
             });
         };
-    })
+    });
+
+angular
+    .module('ZooApp')
     .directive('onEsc', function () {
         return function (scope, element, attrs) {
             element.bind('keydown keypress', function (event) {
                 // key code [ESC]
                 if (event.which === 27) {
                     scope.$apply(function () {
-                        scope.$eval(attrs.onEnter);
+                        scope.$eval(attrs.onEsc);
                     });
                     event.preventDefault();
                 }
             });
         };
-    })
-    .directive('canChange', [function(){
-        return {
-            restrict: 'A',
-            transclude: true,
-            templateUrl: '/src/templates/modules/directives/can-change.html'
-        };
-    }]);
+    });
 
-;angular
+angular
     .module('ZooApp')
     .filter('list2object', [function(){
         return function(list, key){
@@ -246,7 +259,7 @@ angular
     }]);
 
 
-;angular
+angular
     .module('ZooApp')
     .filter('units', [function(){
         var units = {
@@ -268,7 +281,7 @@ angular
         };
     }]);
 
-;angular
+angular
     .module('ZooAppResources', ['ngResource'])
     .factory('Animals', ['$resource', function($resource){
         return $resource('/api/animals/:id');
@@ -280,7 +293,7 @@ angular
         return $resource('/api/eats/:id');
     }]);
 
-;angular
+angular
     .module('ZooApp')
     .service('ConfirmService', ['SweetAlert', function(SweetAlert){
         return {
