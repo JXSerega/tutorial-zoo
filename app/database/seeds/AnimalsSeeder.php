@@ -1,6 +1,6 @@
 <?php
 
-class AnimalsSeeder {
+class AnimalsSeeder extends Seeder {
 
     public function run($count = 100){
         DB::table('animals')->delete();
