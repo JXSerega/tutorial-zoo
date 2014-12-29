@@ -1,0 +1,28 @@
+<nav>
+    <ul class="pagination">
+        <li ng-class="{'disabled': pagination.page == 0}">
+            <a href="#" aria-label="Назад"
+               ng-click="pagination.prevPage()"
+               ng-disabled="pagination.page == 0">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="disabled" ng-if="pagination.page | pageDot : 'before' : pagination.numPages"><span>..</span></li>
+        <li ng-repeat="n in [] | range: pagination.numPages"
+            ng-class="{'active': n == pagination.page}"
+            ng-if="n | pagesList : pagination.page : pagination.numPages">
+            <a href="#"
+               ng-click="pagination.toPageId(n)"
+               ng-disabled="n == pagination.page"
+               ng-bind="n + 1"></a>
+        </li>
+        <li class="disabled" ng-if="pagination.page | pageDot : 'after' : pagination.numPages"><span>..</span></li>
+        <li ng-class="{'disabled': pagination.page + 1 >= pagination.numPages}">
+            <a href="#" aria-label="Вперед"
+               ng-click="pagination.nextPage()"
+               ng-disabled="pagination.page + 1 >= pagination.numPages">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

@@ -10,8 +10,6 @@ class AnimalsController extends BaseController {
      */
     public function index()
     {
-        sleep(3);
-
         return Response::json(
             (new Animals())->getList()
         );

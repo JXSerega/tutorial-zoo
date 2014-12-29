@@ -6,7 +6,12 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"barryvdh/laravel-ide-helper": "~1.11"
+		"barryvdh/laravel-ide-helper": "~1.11",
+		"itsgoingd/clockwork": "1.*",
+	  	"itsgoingd/clockwork-web": "1.*"
+	},
+	"require-dev": {
+	  "xethron/migrations-generator": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
