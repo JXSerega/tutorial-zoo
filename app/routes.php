@@ -20,4 +20,8 @@ Route::group(['prefix' => '/api'], function(){
 	Route::resource('/animals', 'AnimalsController');
 	Route::resource('/animals.eats', 'AnimalsEatsController');
 
+	Route::get('/generate/animals/{count}', 'GenerateController@animals')->where([
+		'count' => '[0-9]+'
+	]);
+
 });

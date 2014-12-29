@@ -17,19 +17,19 @@
                     <tr>
                         <th>#</th>
                         <th>Тип</th>
-                        <th>Кол-во</th>
                         <th>Цена</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="animal in animals" go="'/animals/' + animal.id" title="Перейти в карточку">
+                    <tr ng-repeat="animal in animals | startFrom: animalsPagination.page * animalsPagination.perPage | limitTo: animalsPagination.perPage" go="'/animals/' + animal.id" title="Перейти в карточку">
                         <td ng-bind="animal.id"></td>
                         <td ng-bind="animal.type"></td>
-                        <td ng-bind="animal.count + ' шт'"></td>
                         <td ng-bind="animal.price"></td>
                     </tr>
                 </tbody>
             </table>
+
+            <div pagination="animalsPagination"></div>
         </div>
     </div>
     <div class="col-sm-6">
@@ -51,7 +51,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="eat in eats" go="'/eats/' + eat.id" title="Перейти в карточку">
+                    <tr ng-repeat="eat in eats | startFrom: eatsPagination.page * eatsPagination.perPage | limitTo: eatsPagination.perPage"
+                        go="'/eats/' + eat.id" title="Перейти в карточку">
                         <td ng-bind="eat.id"></td>
                         <td ng-bind="eat.name"></td>
                         <td>
@@ -62,6 +63,8 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div pagination="eatsPagination"></div>
         </div>
     </div>
 </div>

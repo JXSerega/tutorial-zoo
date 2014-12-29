@@ -1,6 +1,5 @@
 angular
     .module('ZooApp', [
-        //'ngMock',
         'ngAnimate',
         'ngResource',
         'ngRoute',
@@ -11,6 +10,7 @@ angular
         'ui.select',
         'angular-loading-bar',
         'oitozero.ngSweetAlert',
+        'simplePagination',
         'ZooAppResources'
     ])
     .config([

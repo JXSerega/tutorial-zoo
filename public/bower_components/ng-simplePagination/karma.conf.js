@@ -1,7 +1,5 @@
 // Karma configuration
-// Generated on Sun Dec 28 2014 16:04:07 GMT+0300 (MSK)
-
-/*jshint -W117 */
+// Generated on Tue Jul 29 2014 12:07:06 GMT+0100 (BST)
 
 module.exports = function(config) {
   config.set({
@@ -14,28 +12,17 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
+    plugins: [
+          "karma-phantomjs-launcher",
+          "karma-jasmine"
+        ],
 
     // list of files / patterns to load in the browser
     files: [
-      'bower_components/angular/angular.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-animate/angular-animate.min.js',
-      'bower_components/angular-resource/angular-resource.min.js',
-      'bower_components/angular-route/angular-route.min.js',
-      'bower_components/angular-sanitize/angular-sanitize.min.js',
-      'bower_components/angular-strap/dist/angular-strap.min.js',
-      'bower_components/angular-strap/dist/angular-strap.tpl.min.js',
-      'bower_components/angular-growl-v2/build/angular-growl.min.js',
-      'bower_components/angular-busy/dist/angular-busy.min.js',
-      'bower_components/ui-select/dist/select.min.js',
-      'bower_components/angular-loading-bar/build/loading-bar.min.js',
-      'bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js',
-      'bower_components/angular-sweetalert/SweetAlert.min.js',
-      'bower_components/ng-simplePagination/simplePagination.js',
-
-      'src/**/*.js',
-      'test/**/*Spec.js',
-      'bower_components/**/*.spec.js'
+        'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js',
+        'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-mocks.js',
+        'simplePagination.js',
+        '*.spec.js'
     ],
 
 
@@ -47,19 +34,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'build/**/*.js': ['coverage']
-    },
-
-    coverageReporter: {
-      type : 'html',
-      dir : 'coverage/'
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
 
 
     // web server port
@@ -76,16 +57,16 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
+    autoWatch: false,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false
+    singleRun: true
   });
 };

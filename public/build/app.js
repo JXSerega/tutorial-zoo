@@ -1,6 +1,5 @@
 angular
     .module('ZooApp', [
-        //'ngMock',
         'ngAnimate',
         'ngResource',
         'ngRoute',
@@ -11,6 +10,7 @@ angular
         'ui.select',
         'angular-loading-bar',
         'oitozero.ngSweetAlert',
+        'simplePagination',
         'ZooAppResources'
     ])
     .config([
@@ -136,10 +136,22 @@ angular
 angular
     .module('ZooApp')
     .controller('OverviewCtrl', [
-        '$scope', 'Animals', 'Eats',
-        function($scope, Animals, Eats){
-            $scope.animals = Animals.query();
-            $scope.eats = Eats.query();
+        '$scope', 'Animals', 'Eats', 'Pagination',
+        function($scope, Animals, Eats, Pagination){
+            $scope.animalsPagination = Pagination.getNew(10);
+            $scope.eatsPagination = Pagination.getNew(10);
+
+            $scope.animals = Animals.query(function(){
+                $scope.animalsPagination.numPages = Math.ceil(
+                    $scope.animals.length / $scope.animalsPagination.perPage
+                );
+            });
+
+            $scope.eats = Eats.query(function(){
+                $scope.eatsPagination.numPages = Math.ceil(
+                    $scope.eats.length / $scope.eatsPagination.perPage
+                );
+            });
         }
     ]);
 
@@ -230,6 +242,19 @@ angular
 
 angular
     .module('ZooApp')
+    .directive('pagination', [function(){
+        return {
+            restrict: 'A',
+            replace: true,
+            scope: {
+                pagination: '='
+            },
+            templateUrl: '/src/templates/modules/directives/pagination.html'
+        };
+    }]);
+
+angular
+    .module('ZooApp')
     .filter('list2object', [function(){
         return function(list, key){
             if (!list || !angular.isArray(list)) {
@@ -258,6 +283,83 @@ angular
         };
     }]);
 
+
+angular
+    .module('ZooApp')
+    .filter('pageDot', [function(){
+        return function(active, type, numPages){
+            if (typeof active === 'undefined' || active === null ||
+                typeof type === 'undefined' || type === null ||
+                typeof numPages === 'undefined' || numPages === null)
+            {
+                return false;
+            }
+
+            if (numPages <= 5) {
+                return false;
+            }
+
+            switch (type) {
+                case 'before':
+
+                    if (active > 2) {
+                        return true;
+                    }
+
+                    break;
+
+                case 'after':
+
+                    if (active < numPages - 3) {
+                        return true;
+                    }
+
+                    break;
+
+                default:
+
+                    throw new TypeError('Page dot invalid type');
+            }
+
+            return false;
+        };
+    }]);
+
+angular
+    .module('ZooApp')
+    .filter('pagesList', [function(){
+        return function(page, active, numPages){
+            if (typeof page === 'undefined' || page === null ||
+                typeof active === 'undefined' || active === null ||
+                typeof numPages === 'undefined' || numPages === null)
+            {
+                return false;
+            }
+
+            if (numPages <= 5 || page === active) {
+                return true;
+            }
+
+            if (active < 3 && page < 5) {
+                return true;
+            }
+
+            if (active > numPages - 3 && page > numPages - 6) {
+                return true;
+            }
+
+            var periodBefore, periodAfter;
+
+            periodBefore = active - 3;
+            periodAfter = active + 3;
+
+            if (periodBefore < page && page < periodAfter) {
+                return true;
+            }
+
+            return false;
+        };
+    }]);
 
 angular
     .module('ZooApp')
